@@ -1,16 +1,10 @@
-from playwright.sync_api import Playwright, sync_playwright, expect
 import pytest
 
 
 @pytest.mark.regression
-def test_run(playwright: Playwright) -> None:
-    browser = playwright.chromium.launch(headless=False)
-    context = browser.new_context()
+def test_login12(set_up) -> None:
+    page = set_up
 
-    # Open new page
-    page = context.new_page()
-
-    # Go to https://www.google.com/?gws_rd=ssl
     page.goto("https://www.google.com/?gws_rd=ssl")
 
     # Click button:has-text("Accept all")
@@ -27,12 +21,6 @@ def test_run(playwright: Playwright) -> None:
     # Press Enter
     page.locator("[aria-label=\"Search\"]").press("Enter")
 
-    # ---------------------
-    context.close()
-    browser.close()
-
-#  this call is redundant due to pytest
-
 #
 # with sync_playwright() as playwright:
-#     test_run(playwright)
+#     test_login(playwright)

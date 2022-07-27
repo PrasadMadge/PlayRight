@@ -1,7 +1,9 @@
 from playwright.sync_api import Playwright, sync_playwright
-from LoginPage import LoginPage
+from test_python_package.tests_POM_sauce.LoginPage import LoginPage
+import pytest
 
-def run(playwright: Playwright) -> None:
+# @pytest.mark.skip(reason = "not ready")
+def test_run(playwright: Playwright) -> None:
     browser = playwright.chromium.launch(headless=False)
     context = browser.new_context()
 
@@ -22,5 +24,5 @@ def run(playwright: Playwright) -> None:
     context.close()
     browser.close()
 
-with sync_playwright() as playwright:
-    run(playwright)
+# with sync_playwright() as playwright:
+#     test_run(playwright)
